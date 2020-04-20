@@ -28,7 +28,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     def validate_email(self,validated_data):
         if 'email' not in validated_data:
-            error_messages = {"email": ["Must include email"]}
+            error_messages = ["Must include email"]
             raise serializers.ValidationError(error_messages)
         return validated_data
 
