@@ -41,9 +41,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+
+    #TOKEN (expires 10hrs)
     'knox',
+
     #APPS
-    'users'
+    'users',
+    'commerce'
 
 ]
 
