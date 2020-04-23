@@ -8,6 +8,7 @@ CATEGORY_CHOICES = (
     ('F', '50L Keg')
 )
 
+
 class Item(models.Model):
     title = models.CharField(max_length=100)
     price = models.FloatField()
@@ -34,10 +35,10 @@ class Item(models.Model):
         return reverse("core:remove-from-cart", kwargs={
             'slug': self.slug
         })
-'''
+
 
 class OrderItem(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+    user = models.ForeignKey(User,
                              on_delete=models.CASCADE)
     ordered = models.BooleanField(default=False)
 
@@ -63,6 +64,7 @@ class OrderItem(models.Model):
             return self.get_total_item_price()
 
 
+'''
 class Order(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE)

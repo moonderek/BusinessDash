@@ -15,11 +15,7 @@ class ItemViewSet(viewsets.ModelViewSet):
     queryset = Item.objects.all()
     serializer_class = ItemSerializer
 
-    # def get_queryset(self, request, format=None):
-    #items = [item for item in Items.objects.all()]
-    # return Response(items)
-
-
+# Secondary Method
 '''
 #need to register in urls.py 
 
