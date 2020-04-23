@@ -42,14 +42,18 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
 
-    #TOKEN (expires 10hrs)
+    # TOKEN (expires 10hrs)
     'knox',
 
-    #APPS
+    # APPS
     'users',
     'commerce'
 
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',)
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -1,10 +1,21 @@
 from commerce.models import Item
 from rest_framework import viewsets, permissions
-from .serializers import ItemSerializer
+from .serializers import ItemSerializer, OrderItemSerializer
 
 # Item Viewset -> allows
 from rest_framework.views import APIView
 from rest_framework.response import Response
+
+
+class OrderItemViewSet(viewsets.ModelViewSet):
+    permission_classes = [
+        permissions.IsAuthenticated
+    ]
+
+    serializer_class = OrderItemSerializer
+
+    def get_queryset(self):
+        return self.request.user.orderitems.all()
 
 
 class ItemViewSet(viewsets.ModelViewSet):
@@ -14,6 +25,7 @@ class ItemViewSet(viewsets.ModelViewSet):
     # ]
     queryset = Item.objects.all()
     serializer_class = ItemSerializer
+
 
 # Secondary Method
 '''

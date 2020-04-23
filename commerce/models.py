@@ -38,7 +38,7 @@ class Item(models.Model):
 
 
 class OrderItem(models.Model):
-    user = models.ForeignKey(User,
+    user = models.ForeignKey(User, related_name="orderitems",
                              on_delete=models.CASCADE)
     ordered = models.BooleanField(default=False)
 
