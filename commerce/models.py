@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django_countries.fields import CountryField
 
 
 CATEGORY_CHOICES = (
@@ -16,7 +17,7 @@ class Item(models.Model):
     category = models.CharField(choices=CATEGORY_CHOICES, max_length=2)
     slug = models.SlugField()
     description = models.TextField()
-    image = models.ImageField()
+    image = models.ImageField(blank=True, null=True)
 
     def __str__(self):
         return self.title
@@ -64,9 +65,8 @@ class OrderItem(models.Model):
             return self.get_total_item_price()
 
 
-'''
 class Order(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+    user = models.ForeignKey(User, related_name="order",
                              on_delete=models.CASCADE)
 
     items = models.ManyToManyField(OrderItem)
@@ -90,7 +90,8 @@ class Order(models.Model):
 
 
 class BillingAddress(models.Model):
-    user = models.ForeignKey(User,related_name="billingaddress", on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(
+        User, related_name="billingaddress", on_delete=models.CASCADE, null=True)
     street_address = models.CharField(max_length=100)
     apartment_address = models.CharField(max_length=100)
     country = CountryField(multiple=False)
@@ -102,7 +103,8 @@ class BillingAddress(models.Model):
 
 class Payment(models.Model):
     stripe_charge_id = models.CharField(max_length=50)
-    user =  models.ForeignKey(User,related_name="payment", on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(User, related_name="payment",
+                             on_delete=models.CASCADE, null=True)
     amount = models.FloatField()
     timestamp = models.DateTimeField(auto_now_add=True)
 
@@ -115,4 +117,3 @@ class Coupon(models.Model):
 
     def __str__(self):
         return self.code
-'''
